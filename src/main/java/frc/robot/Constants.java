@@ -74,4 +74,21 @@ public final class Constants {
         public static final double MAX_TURN_SPEED = 3 * Math.PI;
 
     }
+
+    /**
+     * .
+     */
+    public static class PathFollowingConstants {
+        public static final double STRAFE_KP = 0.0;
+        public static final double STRAFE_KI = 0.0;
+        public static final double STRAFE_KD = 0.0;
+
+        public static final double ROTATION_KP = 0.0;
+        public static final double ROTATION_KI = 0.0;
+        public static final double ROTATION_KD = 0.0;
+
+        public static final double MAX_ROTATION_SPEED = 0.0;
+        public static final double MAX_ROTATION_ACCELERATION = 0.0;
+
+    }
 }

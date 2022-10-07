@@ -1,6 +1,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.sensors.Pigeon2;
+
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -56,13 +58,10 @@ public class DrivetrainSubsystem extends SubsystemBase {
         m_odometry = new SwerveDriveOdometry(m_kinematics, getGyroRotation());
     }
 
-    public Rotation2d getGyroRotation() {
-        return Rotation2d.fromDegrees(m_pideon.getYaw());
-    }
-
+    
     @Override
     public void periodic() {
-
+        
         if (m_homingTimer.hasElapsed(2)) {
             for (int i = 0; i < SwerveModules.LABLES.length; i++) {
                 m_swerveModules[i].homeEncoder();
@@ -75,6 +74,7 @@ public class DrivetrainSubsystem extends SubsystemBase {
         for (int i = 0; i < m_swerveModules.length; i++) {
             moduleStates[i] = m_swerveModules[i].getState();
         }
+
         m_odometry.update(getGyroRotation(), moduleStates);
     }
 
@@ -91,6 +91,17 @@ public class DrivetrainSubsystem extends SubsystemBase {
         for (int i = 0; i < swerveModuleStates.length; i++) {
             m_swerveModules[i].setModuleState(swerveModuleStates[i]);
         }
+    }
+
+    /**
+     * .
+     */
+    public Rotation2d getGyroRotation() {
+        return Rotation2d.fromDegrees(m_pideon.getYaw());
+    }
+
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
     }
 
     /**
@@ -113,6 +124,11 @@ public class DrivetrainSubsystem extends SubsystemBase {
 
         setModuleStates(moduleStates);
         
+    }
+
+
+    public void setChassieSpeeds(ChassisSpeeds chassisSpeeds) {
+        setModuleStates(m_kinematics.toSwerveModuleStates(chassisSpeeds));
     }
 
 }
