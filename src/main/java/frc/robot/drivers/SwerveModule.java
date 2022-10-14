@@ -9,11 +9,13 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardLayout;
 import edu.wpi.first.wpilibj.simulation.DutyCycleEncoderSim;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.Hardware;
-import frc.robot.Constants.SwerveModules;
+import frc.robot.Constants.SwerveModuleConstatntes;
 
 /**
  * .
@@ -31,6 +33,7 @@ public class SwerveModule implements AutoCloseable {
     private DutyCycleEncoderSim m_turnAbsoluteEncoderSim;
     private double m_turnTarget;
     private double m_driveTarget;
+    private String m_lable;
 
     /**
      * An emcapushalasing of a swerve modual.
@@ -43,9 +46,15 @@ public class SwerveModule implements AutoCloseable {
      */
     public SwerveModule(String lable, int driveMotorID, int turnMotorID, int absEncoder, double home,
             boolean driverReversed) {
-        m_turnAbsoluteEncoder = new DutyCycleEncoder(absEncoder);
-        m_home = home;
+        m_lable = lable;
 
+        m_home = Preferences.getDouble(m_lable + ":home", -100);
+        if (m_home == -100) {
+            Preferences.setDouble(m_lable + ":home", home);
+            m_home = home;
+        }
+
+        m_turnAbsoluteEncoder = new DutyCycleEncoder(absEncoder);
         m_driveMotor = new CANSparkMax(driveMotorID, MotorType.kBrushless);
         m_turnMotor = new CANSparkMax(turnMotorID, MotorType.kBrushless);
 
@@ -69,26 +78,36 @@ public class SwerveModule implements AutoCloseable {
 
         // m_turnPIDControler.setFeedbackDevice(m_turnRelativeEncoder);
 
-        m_turnPIDControler.setP(SwerveModules.TURN_KP, SwerveModules.SLOT_ID);
-        m_turnPIDControler.setI(SwerveModules.TURN_KI, SwerveModules.SLOT_ID);
-        m_turnPIDControler.setD(SwerveModules.TURN_KD, SwerveModules.SLOT_ID);
+        m_turnPIDControler.setP(SwerveModuleConstatntes.TURN_KP, SwerveModuleConstatntes.SLOT_ID);
+        m_turnPIDControler.setI(SwerveModuleConstatntes.TURN_KI, SwerveModuleConstatntes.SLOT_ID);
+        m_turnPIDControler.setD(SwerveModuleConstatntes.TURN_KD, SwerveModuleConstatntes.SLOT_ID);
 
-        m_drivePIDControler.setP(SwerveModules.DRIVE_KP);
-        m_drivePIDControler.setI(SwerveModules.DRIVE_KI);
-        m_drivePIDControler.setD(SwerveModules.DRIVE_KD);
-        m_drivePIDControler.setFF(SwerveModules.DRIVE_KF);
+        m_drivePIDControler.setP(SwerveModuleConstatntes.DRIVE_KP);
+        m_drivePIDControler.setI(SwerveModuleConstatntes.DRIVE_KI);
+        m_drivePIDControler.setD(SwerveModuleConstatntes.DRIVE_KD);
+        m_drivePIDControler.setFF(SwerveModuleConstatntes.DRIVE_KF);
 
         ShuffleboardLayout layout = Shuffleboard.getTab("Drivetrain").getLayout(lable, "list");
-        // layout.addNumber("Home", this::getHome);
-        // layout.addNumber("Absolute Encoder", this::getAbsolutEncoder);
+        layout.addNumber("Home", this::getHome);
+        layout.addNumber("Absolute Encoder", this::getAbsolutEncoder);
         // layout.addNumber("Turn Encoder", this::getTurnPos);
         // layout.addNumber("Turn Target", this::getTurnTaget);
-        layout.addNumber("Wheel Velocity", () -> {
-            return m_driveTarget - getWheelVeolocity();
-        });
-        layout.addNumber("Turn Error", () -> {
-            return m_turnTarget - getTurnPos();
-        });
+        // layout.addNumber("Wheel Velocity", () -> {
+        // return m_driveTarget - getWheelVeolocity();
+        // });
+        // layout.addNumber("Turn Error", () -> {
+        // return m_turnTarget - getTurnPos();
+        // });
+    }
+
+    /**
+     * .
+     */
+    public void setCurentHome() {
+        m_home = getAbsolutEncoder();
+        Preferences.setDouble(m_lable + ":home", m_home);
+
+        homeEncoder();
     }
 
     public void homeEncoder() {
@@ -137,8 +156,10 @@ public class SwerveModule implements AutoCloseable {
 
         target += Math.round((relitiveEncoderValue - target) / (2 * Math.PI)) * 2 * Math.PI;
 
-        m_turnTarget = target;
-        m_turnPIDControler.setReference(target, ControlType.kPosition);
+        if (Math.abs(m_state.speedMetersPerSecond) > 0.1) {
+            m_turnTarget = target;
+            m_turnPIDControler.setReference(target, ControlType.kPosition);
+        }
         m_driveTarget = m_state.speedMetersPerSecond;
         m_drivePIDControler.setReference(m_state.speedMetersPerSecond, ControlType.kVelocity);
     }
@@ -177,6 +198,11 @@ public class SwerveModule implements AutoCloseable {
         }
 
         return m_turnAbsoluteEncoderSim;
+    }
+
+    public void setBrakeMode(boolean brakeMode) {
+        m_driveMotor.setIdleMode(brakeMode ? IdleMode.kBrake : IdleMode.kCoast);
+        m_turnMotor.setIdleMode(brakeMode ? IdleMode.kBrake : IdleMode.kCoast);
     }
 
     /*

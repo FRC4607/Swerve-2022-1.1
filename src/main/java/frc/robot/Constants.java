@@ -38,7 +38,7 @@ public final class Constants {
     /**
      * Propertys of the Swerve Modules.
      */
-    public static class SwerveModules {
+    public static class SwerveModuleConstatntes {
 
         public static final int SLOT_ID = 0;
         public static final double TURN_KP = 1.0;
@@ -60,18 +60,23 @@ public final class Constants {
             new Translation2d(Hardware.WHEEL_BASE_METER / 2, Hardware.TRACK_WIDTH_METER / 2),
             new Translation2d(Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2),
             new Translation2d(-Hardware.WHEEL_BASE_METER / 2, Hardware.TRACK_WIDTH_METER / 2),
-            new Translation2d(-Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2) };
+            new Translation2d(-Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2) };    
+    }
 
-            
+    /**
+     * .
+     */
+    public static class SwerveControlConstants {
+        public static final double ROTATION_KP = 0.0;
+        public static final double ROTATION_KI = 0.0;
+        public static final double ROTATION_KD = 0.0;
     }
 
     /**
      * Driver controler constants/settings.
      */
     public static class Driver {
-
         public static final double MAX_STRAFE_SPEED = 5;
         public static final double MAX_TURN_SPEED = 3 * Math.PI;
-
     }
 }

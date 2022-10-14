@@ -2,8 +2,10 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.Drive;
+import frc.robot.commands.SetModuleHomes;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
@@ -27,6 +29,9 @@ public class RobotContainer {
     public RobotContainer() {
         // Configure the button bindings
         m_drivetrainSubsystem.setDefaultCommand(new Drive(m_driver, m_drivetrainSubsystem));
+
+        SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));
+        SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));
     }
 
     /**
