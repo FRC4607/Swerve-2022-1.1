@@ -146,4 +146,8 @@ public class DrivetrainSubsystem extends SubsystemBase {
     public Pose2d getPose() {
         return m_odometry.getPoseMeters();
     }
+
+    public void resetHeading() {
+        m_odometry.resetPosition(getPose(), new Rotation2d());
+    }
 }

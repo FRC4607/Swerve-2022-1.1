@@ -52,7 +52,7 @@ public class Drive extends CommandBase {
         double rotate = MathUtil.applyDeadband(m_driver.getRightX(), Hardware.CONTROLER_DEADBAND)
                 * Driver.MAX_TURN_SPEED;
 
-        double rotation = m_drivetrainSubsystem.getPose().getRotation().getDegrees();
+        double rotation = m_drivetrainSubsystem.getGyroRotation().getDegrees();
         if (rotate == 0) {
             if (!m_hold) {
                 m_rotationPID.setSetpoint(rotation);
