@@ -32,8 +32,8 @@ public class RobotContainer {
         // Configure the button bindings
         m_drivetrainSubsystem.setDefaultCommand(new Drive(m_driver, m_drivetrainSubsystem));
 
-        JoystickButton driver_start = new JoystickButton(m_driver, XboxController.Button.kStart.value);
-        driver_start.whenPressed(new RestHeading(m_drivetrainSubsystem));
+        JoystickButton driverStart = new JoystickButton(m_driver, XboxController.Button.kStart.value);
+        driverStart.whenPressed(new RestHeading(m_drivetrainSubsystem));
 
         SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));
         SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));

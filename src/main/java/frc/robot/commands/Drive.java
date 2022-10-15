@@ -4,6 +4,7 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants.Driver;
 import frc.robot.Constants.Hardware;
@@ -41,10 +42,17 @@ public class Drive extends CommandBase {
                 SwerveControlConstants.ROTATION_KD);
         m_rotationPID.enableContinuousInput(-Math.PI, Math.PI);
 
+        // SmartDashboard.putNumber("Trun P", SwerveControlConstants.ROTATION_KP);
+
     }
 
     @Override
     public void execute() {
+        // double newPTerm = SmartDashboard.getNumber("Trun P", 0);
+        // if (newPTerm != m_rotationPID.getP()) {
+        //     m_rotationPID.setP(newPTerm);
+        // }
+
         double strafeX = MathUtil.applyDeadband(m_strafeX.calculate(-m_driver.getLeftY()), Hardware.CONTROLER_DEADBAND)
                 * Driver.MAX_STRAFE_SPEED;
         double strafeY = MathUtil.applyDeadband(m_strafeY.calculate(-m_driver.getLeftX()), Hardware.CONTROLER_DEADBAND)
@@ -52,15 +60,15 @@ public class Drive extends CommandBase {
         double rotate = MathUtil.applyDeadband(m_driver.getRightX(), Hardware.CONTROLER_DEADBAND)
                 * Driver.MAX_TURN_SPEED;
 
-        double rotation = m_drivetrainSubsystem.getGyroRotation().getDegrees();
-        if (rotate == 0) {
-            if (!m_hold) {
-                m_rotationPID.setSetpoint(rotation);
-                m_hold = true;
-            }
+        // double rotation = m_drivetrainSubsystem.getGyroRotation().getDegrees();
+        // if (rotate == 0) {
+        //     if (!m_hold) {
+        //         m_rotationPID.setSetpoint(rotation);
+        //         m_hold = true;
+        //     }
 
-            rotate = m_rotationPID.calculate(rotation);
-        }
+        //     rotate = m_rotationPID.calculate(rotation);
+        // }
 
 
         m_drivetrainSubsystem.drive(strafeX, strafeY, rotate,

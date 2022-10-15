@@ -15,7 +15,7 @@ public class RestHeading extends CommandBase {
     
     @Override
     public void initialize() {
-        m_drivetrainSubsystem.setModuleHomes();
+        m_drivetrainSubsystem.resetHeading();
     }
 
     @Override

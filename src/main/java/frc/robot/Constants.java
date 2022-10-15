@@ -67,7 +67,7 @@ public final class Constants {
      * .
      */
     public static class SwerveControlConstants {
-        public static final double ROTATION_KP = 0.0;
+        public static final double ROTATION_KP = 1.0;
         public static final double ROTATION_KI = 0.0;
         public static final double ROTATION_KD = 0.0;
     }

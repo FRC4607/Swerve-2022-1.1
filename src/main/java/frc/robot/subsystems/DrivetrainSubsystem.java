@@ -147,7 +147,12 @@ public class DrivetrainSubsystem extends SubsystemBase {
         return m_odometry.getPoseMeters();
     }
 
+    /**
+     * .
+     */
     public void resetHeading() {
-        m_odometry.resetPosition(getPose(), new Rotation2d());
+        Pose2d curentPose = getPose();
+        Pose2d newPose = new Pose2d(curentPose.getTranslation(), new Rotation2d());
+        m_odometry.resetPosition(newPose, getGyroRotation());
     }
 }
