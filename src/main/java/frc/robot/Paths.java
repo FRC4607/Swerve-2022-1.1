@@ -10,4 +10,3 @@ public class Paths {
     public static final PathPlannerTrajectory FORWARD = PathPlanner.loadPath("Forward", 1.0, 0.5);
     public static final PathPlannerTrajectory OTHER_AUTO = PathPlanner.loadPath("Other Auto", 1.5, 2);
 }
-// Other Auto

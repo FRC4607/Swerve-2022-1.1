@@ -18,7 +18,7 @@ import frc.robot.Constants.Hardware;
 import frc.robot.Constants.SwerveModuleConstatntes;
 
 /**
- * .
+ * A class that encapsulates a swerve module.
  */
 public class SwerveModule implements AutoCloseable {
     private CANSparkMax m_driveMotor;
@@ -44,8 +44,8 @@ public class SwerveModule implements AutoCloseable {
      * @param home         The reading of the Absolute encoder when the modual is at
      *                     the home rotation
      */
-    public SwerveModule(String lable, int driveMotorID, int turnMotorID, int absEncoder, double home,
-            boolean driverReversed) {
+    public SwerveModule(String lable, int driveMotorID, int turnMotorID, int absEncoder,
+            double home, boolean driverReversed) {
         m_lable = lable;
 
         m_home = Preferences.getDouble(m_lable + ":home", -100);
@@ -101,7 +101,7 @@ public class SwerveModule implements AutoCloseable {
     }
 
     /**
-     * .
+     * Sets the curent position of the module as home.
      */
     public void setCurentHome() {
         m_home = getAbsolutEncoder();
@@ -109,6 +109,7 @@ public class SwerveModule implements AutoCloseable {
 
         homeEncoder();
     }
+
 
     public void homeEncoder() {
         m_turnRelativeEncoder.setPosition(getAbsolutEncoder() - m_home);
@@ -146,7 +147,7 @@ public class SwerveModule implements AutoCloseable {
     }
 
     /**
-     * .
+     * Sets the target module state.
      */
     public void setModuleState(SwerveModuleState state) {
         m_state = SwerveModuleState.optimize(state, new Rotation2d(getTurnPos()));
@@ -190,7 +191,7 @@ public class SwerveModule implements AutoCloseable {
     }
 
     /**
-     * .
+     * Return the endoer sim for testing.
      */
     public DutyCycleEncoderSim getAbsolutEncoderSim() {
         if (m_turnAbsoluteEncoderSim == null) {

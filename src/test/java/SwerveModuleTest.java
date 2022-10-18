@@ -11,7 +11,7 @@ import org.junit.Test;
 
 
 /**
- * .
+ * Testing class for a swerve module.
  */
 public class SwerveModuleTest {
     SwerveModule m_swerveModule;

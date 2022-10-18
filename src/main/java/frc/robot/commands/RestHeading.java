@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * .
+ * Seted the Curent Heading as the forward Direction.
  */
 public class RestHeading extends CommandBase {
     private DrivetrainSubsystem m_drivetrainSubsystem;

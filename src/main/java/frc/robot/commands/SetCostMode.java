@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * .
+ * Setes the cost mode of both the drive and turn motor.
  */
 public class SetCostMode extends CommandBase {
     private DrivetrainSubsystem m_drivetrainSubsystem;
@@ -14,7 +14,7 @@ public class SetCostMode extends CommandBase {
         m_drivetrainSubsystem = drivetrainSubsystem;
         m_brakeMode = brakeMode;
     }
-    
+
     @Override
     public void initialize() {
         m_drivetrainSubsystem.setBrakeMode(m_brakeMode);

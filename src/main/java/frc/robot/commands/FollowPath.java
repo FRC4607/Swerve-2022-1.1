@@ -13,7 +13,7 @@ import frc.robot.Constants.PathFollowingConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * .
+ * Path following Command.
  */
 public class FollowPath extends CommandBase {
     private final PathPlannerTrajectory m_trajectory;
@@ -22,7 +22,7 @@ public class FollowPath extends CommandBase {
     private final HolonomicDriveController m_controller;
 
     /**
-     * .
+     * The Constroctor for a Path following Command.
      *
      * @param trajectory          .
      * @param drivetrainSubsystem .

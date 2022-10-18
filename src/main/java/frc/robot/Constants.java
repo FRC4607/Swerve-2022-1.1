@@ -64,7 +64,7 @@ public final class Constants {
     }
 
     /**
-     * .
+     * The Constnets for Driver PID on heading mantanace.
      */
     public static class SwerveControlConstants {
         public static final double ROTATION_KP = 1.0;
@@ -81,7 +81,7 @@ public final class Constants {
     }
 
     /**
-     * .
+     * Constants for Path Following.
      */
     public static class PathFollowingConstants {
         public static final double STRAFE_KP = 0.0;
