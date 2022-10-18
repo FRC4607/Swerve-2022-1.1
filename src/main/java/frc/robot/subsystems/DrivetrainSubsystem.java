@@ -165,4 +165,9 @@ public class DrivetrainSubsystem extends SubsystemBase {
         Pose2d newPose = new Pose2d(curentPose.getTranslation(), new Rotation2d());
         m_odometry.resetPosition(newPose, getGyroRotation());
     }
+
+
+    public void setPose(Pose2d pose) {
+        m_odometry.resetPosition(pose, getGyroRotation());
+    }
 }

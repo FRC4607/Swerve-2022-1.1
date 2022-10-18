@@ -33,16 +33,23 @@ public class FollowPath extends CommandBase {
         m_timer = new Timer();
 
         m_controller = new HolonomicDriveController(
-                new PIDController(PathFollowingConstants.STRAFE_KP, PathFollowingConstants.STRAFE_KI, PathFollowingConstants.STRAFE_KD),
-                new PIDController(PathFollowingConstants.STRAFE_KP, PathFollowingConstants.STRAFE_KI, PathFollowingConstants.STRAFE_KD),
-                new ProfiledPIDController(PathFollowingConstants.ROTATION_KP, PathFollowingConstants.ROTATION_KI, PathFollowingConstants.ROTATION_KD,
-                    new Constraints(PathFollowingConstants.MAX_ROTATION_SPEED, PathFollowingConstants.MAX_ROTATION_ACCELERATION)));
+                new PIDController(PathFollowingConstants.STRAFE_KP, PathFollowingConstants.STRAFE_KI,
+                        PathFollowingConstants.STRAFE_KD),
+                new PIDController(PathFollowingConstants.STRAFE_KP, PathFollowingConstants.STRAFE_KI,
+                        PathFollowingConstants.STRAFE_KD),
+                new ProfiledPIDController(PathFollowingConstants.ROTATION_KP, PathFollowingConstants.ROTATION_KI,
+                        PathFollowingConstants.ROTATION_KD,
+                        new Constraints(PathFollowingConstants.MAX_ROTATION_SPEED,
+                                PathFollowingConstants.MAX_ROTATION_ACCELERATION)));
+
+        addRequirements(m_drivetrainSubsystem);
     }
 
     @Override
     public void initialize() {
         m_timer.reset();
         m_timer.start();
+        m_drivetrainSubsystem.setPose(m_trajectory.getInitialPose());
     }
 
     @Override

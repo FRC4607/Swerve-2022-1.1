@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive;
+import frc.robot.commands.FollowPath;
 import frc.robot.commands.RestHeading;
 import frc.robot.commands.SetModuleHomes;
 import frc.robot.subsystems.DrivetrainSubsystem;
@@ -37,6 +38,11 @@ public class RobotContainer {
 
         SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));
         SmartDashboard.putData(new SetModuleHomes(m_drivetrainSubsystem));
+
+        SmartDashboard.putData(m_autonomousSelector);
+
+        m_autonomousSelector.addOption("Forward", new FollowPath(Paths.FORWARD, m_drivetrainSubsystem));
+        m_autonomousSelector.addOption("Other Auto", new FollowPath(Paths.OTHER_AUTO, m_drivetrainSubsystem));
     }
 
     /**
