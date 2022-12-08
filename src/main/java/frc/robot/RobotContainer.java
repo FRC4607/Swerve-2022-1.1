@@ -16,9 +16,9 @@ import frc.robot.subsystems.DrivetrainSubsystem;
  */
 public class RobotContainer {
 
-    // Contolers
+    // Controllers
     private final XboxController m_driver = new XboxController(
-            Constants.Hardware.DRIVER_CONTROLER_PORT);
+            Constants.Hardware.DRIVER_CONTROLLER_PORT);
 
     // Subsystems
     private final DrivetrainSubsystem m_drivetrainSubsystem = new DrivetrainSubsystem();

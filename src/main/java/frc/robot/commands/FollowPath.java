@@ -22,7 +22,7 @@ public class FollowPath extends CommandBase {
     private final HolonomicDriveController m_controller;
 
     /**
-     * The Constroctor for a Path following Command.
+     * The Constructor for a Path following Command.
      *
      * @param trajectory          .
      * @param drivetrainSubsystem .
@@ -54,13 +54,13 @@ public class FollowPath extends CommandBase {
 
     @Override
     public void execute() {
-        double curentTime = m_timer.get();
-        PathPlannerState desiredState = (PathPlannerState) m_trajectory.sample(curentTime);
+        double currentTime = m_timer.get();
+        PathPlannerState desiredState = (PathPlannerState) m_trajectory.sample(currentTime);
 
         ChassisSpeeds chassisSpeeds = m_controller.calculate(m_drivetrainSubsystem.getPose(), desiredState,
                 desiredState.holonomicRotation);
 
-        m_drivetrainSubsystem.setChassieSpeeds(chassisSpeeds);
+        m_drivetrainSubsystem.setChassisSpeeds(chassisSpeeds);
 
     }
 }

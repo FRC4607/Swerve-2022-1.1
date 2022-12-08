@@ -17,40 +17,40 @@ import edu.wpi.first.math.util.Units;
  */
 public final class Constants {
     /**
-     * Phisical Connections and Propertys.
+     * Physical Connections and Properties.
      */
     public static class Hardware {
-        public static final int DRIVER_CONTROLER_PORT = 0;
-        public static final double CONTROLER_DEADBAND = 0.1;
+        public static final int DRIVER_CONTROLLER_PORT = 0;
+        public static final double CONTROLLER_DEADBAND = 0.1;
         public static final int CTRE_MAG_ENCODER_CPR = 2048;
         public static final int NEO_CPR = 42;
-        public static final double DRIVE_GEER_RATIO = 8.16;
-        public static final double TURN_GEER_RATIO = 12.8;
+        public static final double DRIVE_GEAR_RATIO = 8.16;
+        public static final double TURN_GEAR_RATIO = 12.8;
         public static final double WHEEL_DIAMETER_INCHES = 4;
         public static final double WHEEL_CIRCUMFERENCE_METERS = Units.inchesToMeters(Math.PI * WHEEL_DIAMETER_INCHES);
 
         public static final double TRACK_WIDTH_METER = Units.inchesToMeters(18.0);
         public static final double WHEEL_BASE_METER = Units.inchesToMeters(17.125);
         public static final double MAX_SPEED_METER_PER_SECOND = 5.0;
-        public static final int PIDEON_CAN_ID = 6;
+        public static final int PIGEON_CAN_ID = 6;
     }
 
     /**
-     * Propertys of the Swerve Modules.
+     * Properties of the Swerve Modules.
      */
-    public static class SwerveModuleConstatntes {
+    public static class SwerveModuleConstants {
 
         public static final int SLOT_ID = 0;
         public static final double TURN_KP = 1.0;
         public static final double TURN_KI = 0.0;
         public static final double TURN_KD = 0.75;
-        
+
         public static final double DRIVE_KP = 0.1;
         public static final double DRIVE_KI = 0.0;
         public static final double DRIVE_KD = 0.01;
         public static final double DRIVE_KF = 0.245;
 
-        public static final String[] LABLES = new String[] { "Front Left", "Front Right", "Rear Left", "Rear Right" };
+        public static final String[] LABELS = new String[] { "Front Left", "Front Right", "Rear Left", "Rear Right" };
         public static final int[] TURN_CAN_IDS = new int[] { 13, 2, 14, 1 };
         public static final int[] DRIVE_CAN_IDS = new int[] { 12, 3, 15, 20 };
         public static final int[] ABS_ENCODER_DIO_PORT = new int[] { 24, 8, 5, 2 };
@@ -60,11 +60,11 @@ public final class Constants {
             new Translation2d(Hardware.WHEEL_BASE_METER / 2, Hardware.TRACK_WIDTH_METER / 2),
             new Translation2d(Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2),
             new Translation2d(-Hardware.WHEEL_BASE_METER / 2, Hardware.TRACK_WIDTH_METER / 2),
-            new Translation2d(-Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2) };    
+            new Translation2d(-Hardware.WHEEL_BASE_METER / 2, -Hardware.TRACK_WIDTH_METER / 2) };
     }
 
     /**
-     * The Constnets for Driver PID on heading mantanace.
+     * The Contents for Driver PID on heading maintenance.
      */
     public static class SwerveControlConstants {
         public static final double ROTATION_KP = 1.0;
@@ -73,7 +73,7 @@ public final class Constants {
     }
 
     /**
-     * Driver controler constants/settings.
+     * Driver controller constants/settings.
      */
     public static class Driver {
         public static final double MAX_STRAFE_SPEED = 5;

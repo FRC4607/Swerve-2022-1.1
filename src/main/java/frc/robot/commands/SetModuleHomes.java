@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * Sets the Curent position of the modules as the home position.
+ * Sets the Current position of the modules as the home position.
  */
 public class SetModuleHomes extends CommandBase {
     private DrivetrainSubsystem m_drivetrainSubsystem;
@@ -12,7 +12,7 @@ public class SetModuleHomes extends CommandBase {
     public SetModuleHomes(DrivetrainSubsystem drivetrainSubsystem) {
         m_drivetrainSubsystem = drivetrainSubsystem;
     }
-    
+
     @Override
     public void initialize() {
         m_drivetrainSubsystem.setModuleHomes();

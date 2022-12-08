@@ -7,14 +7,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * A command that added debug to Smart Dashbord for individuely controling a
+ * A command that added debug to Smart Dashboard for individually controlling a
  * swerve module.
  */
 public class TestModule extends CommandBase {
     private DrivetrainSubsystem m_drivetrainSubsystem;
 
     /**
-     * A command that added debug to Smart Dashbord for individuely controling a
+     * A command that added debug to Smart Dashboard for individually controlling a
      * swerve module..
      *
      * @param drivetrainSubsystem The drivetrain subsystem

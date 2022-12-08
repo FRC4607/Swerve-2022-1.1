@@ -12,7 +12,7 @@ import frc.robot.Constants.SwerveControlConstants;
 import frc.robot.subsystems.DrivetrainSubsystem;
 
 /**
- * Teleop drive command. Is Field Orented.
+ * Teleop drive command. Is Field Oriented.
  */
 public class Drive extends CommandBase {
     private XboxController m_driver;
@@ -24,9 +24,9 @@ public class Drive extends CommandBase {
     private PIDController m_rotationPID;
 
     /**
-     * Teleop drive command. Is Field Orented.
+     * Teleop drive command. Is Field Oriented.
      *
-     * @param driver              The xBox controler that is the driver
+     * @param driver              The xBox controller that is the driver
      * @param drivetrainSubsystem The drivetrain subsystem
      */
     public Drive(XboxController driver, DrivetrainSubsystem drivetrainSubsystem) {
@@ -42,34 +42,33 @@ public class Drive extends CommandBase {
                 SwerveControlConstants.ROTATION_KD);
         m_rotationPID.enableContinuousInput(-Math.PI, Math.PI);
 
-        // SmartDashboard.putNumber("Trun P", SwerveControlConstants.ROTATION_KP);
+        // SmartDashboard.putNumber("Turn P", SwerveControlConstants.ROTATION_KP);
 
     }
 
     @Override
     public void execute() {
-        // double newPTerm = SmartDashboard.getNumber("Trun P", 0);
+        // double newPTerm = SmartDashboard.getNumber("Turn P", 0);
         // if (newPTerm != m_rotationPID.getP()) {
-        //     m_rotationPID.setP(newPTerm);
+        // m_rotationPID.setP(newPTerm);
         // }
 
-        double strafeX = MathUtil.applyDeadband(m_strafeX.calculate(-m_driver.getLeftY()), Hardware.CONTROLER_DEADBAND)
+        double strafeX = MathUtil.applyDeadband(m_strafeX.calculate(-m_driver.getLeftY()), Hardware.CONTROLLER_DEADBAND)
                 * Driver.MAX_STRAFE_SPEED;
-        double strafeY = MathUtil.applyDeadband(m_strafeY.calculate(-m_driver.getLeftX()), Hardware.CONTROLER_DEADBAND)
+        double strafeY = MathUtil.applyDeadband(m_strafeY.calculate(-m_driver.getLeftX()), Hardware.CONTROLLER_DEADBAND)
                 * Driver.MAX_STRAFE_SPEED;
-        double rotate = MathUtil.applyDeadband(m_driver.getRightX(), Hardware.CONTROLER_DEADBAND)
+        double rotate = MathUtil.applyDeadband(m_driver.getRightX(), Hardware.CONTROLLER_DEADBAND)
                 * Driver.MAX_TURN_SPEED;
 
         // double rotation = m_drivetrainSubsystem.getGyroRotation().getDegrees();
         // if (rotate == 0) {
-        //     if (!m_hold) {
-        //         m_rotationPID.setSetpoint(rotation);
-        //         m_hold = true;
-        //     }
-
-        //     rotate = m_rotationPID.calculate(rotation);
+        // if (!m_hold) {
+        // m_rotationPID.setSetpoint(rotation);
+        // m_hold = true;
         // }
 
+        // rotate = m_rotationPID.calculate(rotation);
+        // }
 
         m_drivetrainSubsystem.drive(strafeX, strafeY, rotate,
                 true);
